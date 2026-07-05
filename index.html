@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>鍦ㄧ嚎宸ュ叿绠?- JSON鏍煎紡鍖?| Base64 | 鏃堕棿鎴?| 浜岀淮鐮?| Markdown</title>
-<meta name="description" content="鍏嶈垂鍦ㄧ嚎宸ュ叿闆嗗悎锛欽SON鏍煎紡鍖栭獙璇併€丅ase64缂栬В鐮併€佹椂闂存埑杞崲銆佷簩缁寸爜鐢熸垚銆丮arkdown棰勮缂栬緫鍣ㄣ€傛棤闇€娉ㄥ唽锛屽嵆寮€鍗崇敤銆?>
+<title>在线工具箱 - JSON格式化 | Base64 | 时间戳 | 二维码 | Markdown</title>
+<meta name="description" content="免费在线工具集合：JSON格式化验证、Base64编解码、时间戳转换、二维码生成、Markdown预览编辑器。无需注册，即开即用。">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#333}
@@ -41,83 +41,83 @@ footer{text-align:center;padding:24px;font-size:12px;color:#999}
 </head>
 <body>
 <header>
-<h1>馃摝 鍦ㄧ嚎宸ュ叿绠?/h1>
-<p>鍏嶈垂 路 鏃犻渶娉ㄥ唽 路 娴忚鍣ㄦ湰鍦拌繍琛?/p>
+<h1>📦 在线工具箱</h1>
+<p>免费 · 无需注册 · 浏览器本地运行</p>
 </header>
 
 <nav>
-<button class="active" data-tool="json">JSON 鏍煎紡鍖?/button>
-<button data-tool="base64">Base64 缂栬В鐮?/button>
-<button data-tool="timestamp">鏃堕棿鎴宠浆鎹?/button>
-<button data-tool="qrcode">浜岀淮鐮佺敓鎴?/button>
-<button data-tool="color">棰滆壊閫夋嫨</button>
-<button data-tool="markdown">Markdown 棰勮</button>
+<button class="active" data-tool="json">JSON 格式化</button>
+<button data-tool="base64">Base64 编解码</button>
+<button data-tool="timestamp">时间戳转换</button>
+<button data-tool="qrcode">二维码生成</button>
+<button data-tool="color">颜色选择</button>
+<button data-tool="markdown">Markdown 预览</button>
 </nav>
 
 <div class="ad-banner">
-<span>骞垮憡浣?鈥?Google AdSense</span>
-<!-- AdSense 浠ｇ爜鏀捐繖閲?-->
+<span>广告位 — Google AdSense</span>
+<!-- AdSense 代码放这里 -->
 </div>
 
 <main>
 <div class="tool-panel active" id="panel-json">
-<h2>JSON 鏍煎紡鍖?/ 楠岃瘉</h2>
-<textarea id="json-input" placeholder='绮樿创 JSON 瀛楃涓诧紝渚嬪 {"name":"寮犱笁","age":25}'></textarea>
+<h2>JSON 格式化 / 验证</h2>
+<textarea id="json-input" placeholder='粘贴 JSON 字符串，例如 {"name":"张三","age":25}'></textarea>
 <div class="row">
-<button class="btn btn-primary" onclick="formatJSON()">鏍煎紡鍖?/button>
-<button class="btn btn-outline" onclick="compressJSON()">鍘嬬缉</button>
-<button class="btn btn-outline" onclick="validateJSON()">楠岃瘉</button>
-<button class="btn btn-outline" onclick="clearJSON()">娓呯┖</button>
+<button class="btn btn-primary" onclick="formatJSON()">格式化</button>
+<button class="btn btn-outline" onclick="compressJSON()">压缩</button>
+<button class="btn btn-outline" onclick="validateJSON()">验证</button>
+<button class="btn btn-outline" onclick="clearJSON()">清空</button>
 </div>
 <div class="result-box" id="json-result"></div>
 </div>
 
 <div class="tool-panel" id="panel-base64">
-<h2>Base64 缂栬В鐮?/h2>
-<textarea id="base64-input" placeholder="杈撳叆鏂囨湰鎴?Base64 瀛楃涓?></textarea>
+<h2>Base64 编解码</h2>
+<textarea id="base64-input" placeholder="输入文本或 Base64 字符串"></textarea>
 <div class="row">
-<button class="btn btn-primary" onclick="base64Encode()">缂栫爜</button>
-<button class="btn btn-primary" onclick="base64Decode()">瑙ｇ爜</button>
-<button class="btn btn-outline" onclick="clearBase64()">娓呯┖</button>
+<button class="btn btn-primary" onclick="base64Encode()">编码</button>
+<button class="btn btn-primary" onclick="base64Decode()">解码</button>
+<button class="btn btn-outline" onclick="clearBase64()">清空</button>
 </div>
 <div class="result-box" id="base64-result"></div>
 </div>
 
 <div class="tool-panel" id="panel-timestamp">
-<h2>鏃堕棿鎴宠浆鎹?/h2>
+<h2>时间戳转换</h2>
 <div class="row">
 <div>
-<p class="label">Unix 鏃堕棿鎴筹紙绉掞級</p>
-<input type="number" id="ts-input" placeholder="濡?1718323200">
+<p class="label">Unix 时间戳（秒）</p>
+<input type="number" id="ts-input" placeholder="如 1718323200">
 </div>
 <div>
-<p class="label">鏃ユ湡鏃堕棿</p>
-<input type="text" id="dt-input" placeholder="濡?2024-06-14 12:00:00">
+<p class="label">日期时间</p>
+<input type="text" id="dt-input" placeholder="如 2024-06-14 12:00:00">
 </div>
 </div>
 <div class="row">
-<button class="btn btn-primary" onclick="tsToDate()">鏃堕棿鎴?鈫?鏃ユ湡</button>
-<button class="btn btn-primary" onclick="dateToTs()">鏃ユ湡 鈫?鏃堕棿鎴?/button>
-<button class="btn btn-outline" onclick="tsNow()">褰撳墠鏃堕棿鎴?/button>
+<button class="btn btn-primary" onclick="tsToDate()">时间戳 → 日期</button>
+<button class="btn btn-primary" onclick="dateToTs()">日期 → 时间戳</button>
+<button class="btn btn-outline" onclick="tsNow()">当前时间戳</button>
 </div>
 <div class="result-box" id="ts-result"></div>
 </div>
 
 <div class="tool-panel" id="panel-qrcode">
-<h2>浜岀淮鐮佺敓鎴?/h2>
-<input type="text" id="qr-input" placeholder="杈撳叆缃戝潃鎴栨枃鏈?>
+<h2>二维码生成</h2>
+<input type="text" id="qr-input" placeholder="输入网址或文本">
 <div class="row" style="margin-top:12px">
-<button class="btn btn-primary" onclick="generateQR()">鐢熸垚浜岀淮鐮?/button>
-<button class="btn btn-outline" onclick="downloadQR()">涓嬭浇 PNG</button>
+<button class="btn btn-primary" onclick="generateQR()">生成二维码</button>
+<button class="btn btn-outline" onclick="downloadQR()">下载 PNG</button>
 </div>
 <canvas id="qr-canvas" width="256" height="256" style="margin-top:12px"></canvas>
 </div>
 
 <div class="tool-panel" id="panel-color">
-<h2>棰滆壊閫夋嫨鍣?/h2>
+<h2>颜色选择器</h2>
 <div class="color-grid">
 <div class="color-input-group">
-<p class="label">绾壊</p>
+<p class="label">纯色</p>
 <input type="color" id="color-picker" value="#e94560" oninput="updateColor()">
 <div class="color-preview" id="color-preview" style="background:#e94560"></div>
 <p id="hex-value" style="font-size:13px;margin-top:4px">#E94560</p>
@@ -127,27 +127,27 @@ footer{text-align:center;padding:24px;font-size:12px;color:#999}
 </div>
 
 <div class="tool-panel" id="panel-markdown">
-<h2>Markdown 缂栬緫鍣?/h2>
+<h2>Markdown 编辑器</h2>
 <div class="row">
-<textarea id="md-input" placeholder="# 鏍囬&#10;&#10;**绮椾綋** *鏂滀綋*&#10;&#10;- 鍒楄〃椤?1&#10;- 鍒楄〃椤?2" style="min-height:200px"></textarea>
+<textarea id="md-input" placeholder="# 标题&#10;&#10;**粗体** *斜体*&#10;&#10;- 列表项 1&#10;- 列表项 2" style="min-height:200px"></textarea>
 <div class="result-box" id="md-preview" style="min-height:200px;overflow-y:auto"></div>
 </div>
 <div class="row">
-<button class="btn btn-outline" onclick="insertMdSample()">鎻掑叆绀轰緥</button>
+<button class="btn btn-outline" onclick="insertMdSample()">插入示例</button>
 </div>
 </div>
 </main>
 
 <div class="ad-banner">
-<span>骞垮憡浣?鈥?Google AdSense</span>
+<span>广告位 — Google AdSense</span>
 </div>
 
 <footer>
-<p>鎵€鏈夋暟鎹鐞嗗潎鍦ㄦ祻瑙堝櫒鏈湴瀹屾垚锛屼笉浼氫笂浼犲埌鏈嶅姟鍣ㄣ€?/p>
+<p>所有数据处理均在浏览器本地完成，不会上传到服务器。</p>
 </footer>
 
 <script>
-// 宸ュ叿鍒囨崲
+// 工具切换
 document.querySelectorAll('nav button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -165,7 +165,7 @@ function formatJSON(){
     const obj = JSON.parse(el.value);
     res.innerHTML = '<pre style="color:#2d6a4f">' + JSON.stringify(obj, null, 2).replace(/</g,'&lt;') + '</pre>';
   } catch(e) {
-    res.innerHTML = '<span style="color:#d32f2f">JSON 鏍煎紡閿欒: ' + e.message + '</span>';
+    res.innerHTML = '<span style="color:#d32f2f">JSON 格式错误: ' + e.message + '</span>';
   }
 }
 function compressJSON(){
@@ -175,14 +175,14 @@ function compressJSON(){
     const obj = JSON.parse(el.value);
     res.innerHTML = JSON.stringify(obj);
   } catch(e) {
-    res.innerHTML = '<span style="color:#d32f2f">JSON 鏍煎紡閿欒</span>';
+    res.innerHTML = '<span style="color:#d32f2f">JSON 格式错误</span>';
   }
 }
 function validateJSON(){
   const el = document.getElementById('json-input');
   const res = document.getElementById('json-result');
-  try { JSON.parse(el.value); res.innerHTML = '<span style="color:#2d6a4f">鉁?JSON 鏍煎紡姝ｇ‘</span>'; }
-  catch(e) { res.innerHTML = '<span style="color:#d32f2f">鉂?' + e.message + '</span>'; }
+  try { JSON.parse(el.value); res.innerHTML = '<span style="color:#2d6a4f">✅ JSON 格式正确</span>'; }
+  catch(e) { res.innerHTML = '<span style="color:#d32f2f">❌ ' + e.message + '</span>'; }
 }
 function clearJSON(){ document.getElementById('json-input').value='';document.getElementById('json-result').innerHTML=''; }
 
@@ -198,12 +198,13 @@ function base64Decode(){
     let decoded = decodeURIComponent(escape(atob(val)));
     document.getElementById('base64-result').textContent = decoded;
   } catch(e) {
-    document.getElementById('base64-result').textContent = '瑙ｇ爜澶辫触: 闈炴湁鏁?Base64 瀛楃涓?;
+    document.getElementById('base64-result').textContent = '解码失败: 非有效 Base64 字符串';
   }
 }
 function clearBase64(){ document.getElementById('base64-input').value='';document.getElementById('base64-result').textContent=''; }
 
-// 鏃堕棿鎴?function tsToDate(){
+// 时间戳
+function tsToDate(){
   const ts = parseInt(document.getElementById('ts-input').value);
   if(!ts) return;
   const d = new Date(ts * 1000);
@@ -223,14 +224,15 @@ function tsNow(){
   tsToDate();
 }
 
-// 浜岀淮鐮?- 浣跨敤 Canvas API 绠€鍗曞疄鐜?function generateQR(){
+// 二维码 - 使用 Canvas API 简单实现
+function generateQR(){
   const text = document.getElementById('qr-input').value;
   if(!text) return;
   const canvas = document.getElementById('qr-canvas');
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = '#fff';
   ctx.fillRect(0,0,256,256);
-  // 绠€鏄撴ā鎷燂細鏍规嵁鏂囨湰鐢熸垚瑙嗚鍥炬
+  // 简易模拟：根据文本生成视觉图案
   const hash = simpleHash(text);
   const size = 8, margin = 2, total = 32;
   ctx.fillStyle = '#000';
@@ -259,7 +261,7 @@ function downloadQR(){
   a.click();
 }
 
-// 棰滆壊
+// 颜色
 function updateColor(){
   const hex = document.getElementById('color-picker').value;
   document.getElementById('color-preview').style.background = hex;
@@ -290,7 +292,7 @@ function simpleMD(text){
     .replace(/\n/g,'<br>');
 }
 function insertMdSample(){
-  mdInput.value = '# 娆㈣繋浣跨敤\n\n杩欐槸涓€涓?**Markdown** 缂栬緫鍣ㄣ€俓n\n## 鍔熻兘鍒楄〃\n\n- 瀹炴椂棰勮\n- 鏀寔绮椾綋鍜屾枩浣揬n- 浠ｇ爜楂樹寒\n\n> 鎵€鏈夋暟鎹湰鍦板鐞?;
+  mdInput.value = '# 欢迎使用\n\n这是一个 **Markdown** 编辑器。\n\n## 功能列表\n\n- 实时预览\n- 支持粗体和斜体\n- 代码高亮\n\n> 所有数据本地处理';
   mdPreview.innerHTML = simpleMD(mdInput.value);
 }
 </script>
