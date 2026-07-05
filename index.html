@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鍦ㄧ嚎宸ュ叿绠?- JSON鏍煎紡鍖?| Base64 | 鏃堕棿鎴?| 浜岀淮鐮?| Markdown</title>
+<meta name="description" content="鍏嶈垂鍦ㄧ嚎宸ュ叿闆嗗悎锛欽SON鏍煎紡鍖栭獙璇併€丅ase64缂栬В鐮併€佹椂闂存埑杞崲銆佷簩缁寸爜鐢熸垚銆丮arkdown棰勮缂栬緫鍣ㄣ€傛棤闇€娉ㄥ唽锛屽嵆寮€鍗崇敤銆?>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;color:#333}
+header{background:#1a1a2e;color:#fff;padding:16px 24px;text-align:center}
+header h1{font-size:22px;margin-bottom:4px}
+header p{font-size:13px;color:#aaa}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:12px;background:#16213e}
+nav button{padding:8px 20px;border:none;border-radius:6px;cursor:pointer;font-size:14px;background:#0f3460;color:#e0e0e0;transition:.2s}
+nav button.active,nav button:hover{background:#e94560;color:#fff}
+.ad-banner{text-align:center;padding:12px;background:#fff;border-bottom:1px solid #eee;min-height:90px}
+.ad-banner span{color:#999;font-size:12px}
+main{max-width:1100px;margin:0 auto;padding:20px}
+.tool-panel{background:#fff;border-radius:8px;padding:24px;display:none;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.tool-panel.active{display:block}
+.tool-panel h2{font-size:18px;margin-bottom:16px;color:#1a1a2e}
+textarea,input[type="text"],input[type="number"]{width:100%;padding:12px;border:1px solid #ddd;border-radius:6px;font-size:14px;font-family:monospace;resize:vertical}
+textarea{min-height:160px}
+.row{display:flex;gap:12px;margin:12px 0;flex-wrap:wrap}
+.row>*{flex:1;min-width:200px}
+.btn{padding:10px 24px;border:none;border-radius:6px;cursor:pointer;font-size:14px;transition:.2s;font-weight:500}
+.btn-primary{background:#e94560;color:#fff}
+.btn-primary:hover{background:#c73a54}
+.btn-outline{background:#fff;border:1px solid #ddd;color:#555}
+.btn-outline:hover{background:#f0f0f0}
+.result-box{background:#f8f9fa;padding:12px;border-radius:6px;font-family:monospace;font-size:13px;min-height:40px;word-break:break-all;margin-top:8px}
+.label{font-size:13px;color:#666;margin-bottom:4px;font-weight:500}
+.color-grid{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+.color-input-group{text-align:center}
+.color-input-group input[type="color"]{width:100px;height:48px;border:none;cursor:pointer}
+.color-preview{width:100px;height:40px;border-radius:6px;margin-top:8px;border:1px solid #ddd}
+canvas{border:1px solid #ddd;border-radius:6px;margin:8px 0}
+footer{text-align:center;padding:24px;font-size:12px;color:#999}
+</style>
+</head>
+<body>
+<header>
+<h1>馃摝 鍦ㄧ嚎宸ュ叿绠?/h1>
+<p>鍏嶈垂 路 鏃犻渶娉ㄥ唽 路 娴忚鍣ㄦ湰鍦拌繍琛?/p>
+</header>
+
+<nav>
+<button class="active" data-tool="json">JSON 鏍煎紡鍖?/button>
+<button data-tool="base64">Base64 缂栬В鐮?/button>
+<button data-tool="timestamp">鏃堕棿鎴宠浆鎹?/button>
+<button data-tool="qrcode">浜岀淮鐮佺敓鎴?/button>
+<button data-tool="color">棰滆壊閫夋嫨</button>
+<button data-tool="markdown">Markdown 棰勮</button>
+</nav>
+
+<div class="ad-banner">
+<span>骞垮憡浣?鈥?Google AdSense</span>
+<!-- AdSense 浠ｇ爜鏀捐繖閲?-->
+</div>
+
+<main>
+<div class="tool-panel active" id="panel-json">
+<h2>JSON 鏍煎紡鍖?/ 楠岃瘉</h2>
+<textarea id="json-input" placeholder='绮樿创 JSON 瀛楃涓诧紝渚嬪 {"name":"寮犱笁","age":25}'></textarea>
+<div class="row">
+<button class="btn btn-primary" onclick="formatJSON()">鏍煎紡鍖?/button>
+<button class="btn btn-outline" onclick="compressJSON()">鍘嬬缉</button>
+<button class="btn btn-outline" onclick="validateJSON()">楠岃瘉</button>
+<button class="btn btn-outline" onclick="clearJSON()">娓呯┖</button>
+</div>
+<div class="result-box" id="json-result"></div>
+</div>
+
+<div class="tool-panel" id="panel-base64">
+<h2>Base64 缂栬В鐮?/h2>
+<textarea id="base64-input" placeholder="杈撳叆鏂囨湰鎴?Base64 瀛楃涓?></textarea>
+<div class="row">
+<button class="btn btn-primary" onclick="base64Encode()">缂栫爜</button>
+<button class="btn btn-primary" onclick="base64Decode()">瑙ｇ爜</button>
+<button class="btn btn-outline" onclick="clearBase64()">娓呯┖</button>
+</div>
+<div class="result-box" id="base64-result"></div>
+</div>
+
+<div class="tool-panel" id="panel-timestamp">
+<h2>鏃堕棿鎴宠浆鎹?/h2>
+<div class="row">
+<div>
+<p class="label">Unix 鏃堕棿鎴筹紙绉掞級</p>
+<input type="number" id="ts-input" placeholder="濡?1718323200">
+</div>
+<div>
+<p class="label">鏃ユ湡鏃堕棿</p>
+<input type="text" id="dt-input" placeholder="濡?2024-06-14 12:00:00">
+</div>
+</div>
+<div class="row">
+<button class="btn btn-primary" onclick="tsToDate()">鏃堕棿鎴?鈫?鏃ユ湡</button>
+<button class="btn btn-primary" onclick="dateToTs()">鏃ユ湡 鈫?鏃堕棿鎴?/button>
+<button class="btn btn-outline" onclick="tsNow()">褰撳墠鏃堕棿鎴?/button>
+</div>
+<div class="result-box" id="ts-result"></div>
+</div>
+
+<div class="tool-panel" id="panel-qrcode">
+<h2>浜岀淮鐮佺敓鎴?/h2>
+<input type="text" id="qr-input" placeholder="杈撳叆缃戝潃鎴栨枃鏈?>
+<div class="row" style="margin-top:12px">
+<button class="btn btn-primary" onclick="generateQR()">鐢熸垚浜岀淮鐮?/button>
+<button class="btn btn-outline" onclick="downloadQR()">涓嬭浇 PNG</button>
+</div>
+<canvas id="qr-canvas" width="256" height="256" style="margin-top:12px"></canvas>
+</div>
+
+<div class="tool-panel" id="panel-color">
+<h2>棰滆壊閫夋嫨鍣?/h2>
+<div class="color-grid">
+<div class="color-input-group">
+<p class="label">绾壊</p>
+<input type="color" id="color-picker" value="#e94560" oninput="updateColor()">
+<div class="color-preview" id="color-preview" style="background:#e94560"></div>
+<p id="hex-value" style="font-size:13px;margin-top:4px">#E94560</p>
+</div>
+</div>
+<div class="result-box" id="color-info"></div>
+</div>
+
+<div class="tool-panel" id="panel-markdown">
+<h2>Markdown 缂栬緫鍣?/h2>
+<div class="row">
+<textarea id="md-input" placeholder="# 鏍囬&#10;&#10;**绮椾綋** *鏂滀綋*&#10;&#10;- 鍒楄〃椤?1&#10;- 鍒楄〃椤?2" style="min-height:200px"></textarea>
+<div class="result-box" id="md-preview" style="min-height:200px;overflow-y:auto"></div>
+</div>
+<div class="row">
+<button class="btn btn-outline" onclick="insertMdSample()">鎻掑叆绀轰緥</button>
+</div>
+</div>
+</main>
+
+<div class="ad-banner">
+<span>骞垮憡浣?鈥?Google AdSense</span>
+</div>
+
+<footer>
+<p>鎵€鏈夋暟鎹鐞嗗潎鍦ㄦ祻瑙堝櫒鏈湴瀹屾垚锛屼笉浼氫笂浼犲埌鏈嶅姟鍣ㄣ€?/p>
+</footer>
+
+<script>
+// 宸ュ叿鍒囨崲
+document.querySelectorAll('nav button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + btn.dataset.tool).classList.add('active');
+  });
+});
+
+// JSON
+function formatJSON(){
+  const el = document.getElementById('json-input');
+  const res = document.getElementById('json-result');
+  try {
+    const obj = JSON.parse(el.value);
+    res.innerHTML = '<pre style="color:#2d6a4f">' + JSON.stringify(obj, null, 2).replace(/</g,'&lt;') + '</pre>';
+  } catch(e) {
+    res.innerHTML = '<span style="color:#d32f2f">JSON 鏍煎紡閿欒: ' + e.message + '</span>';
+  }
+}
+function compressJSON(){
+  const el = document.getElementById('json-input');
+  const res = document.getElementById('json-result');
+  try {
+    const obj = JSON.parse(el.value);
+    res.innerHTML = JSON.stringify(obj);
+  } catch(e) {
+    res.innerHTML = '<span style="color:#d32f2f">JSON 鏍煎紡閿欒</span>';
+  }
+}
+function validateJSON(){
+  const el = document.getElementById('json-input');
+  const res = document.getElementById('json-result');
+  try { JSON.parse(el.value); res.innerHTML = '<span style="color:#2d6a4f">鉁?JSON 鏍煎紡姝ｇ‘</span>'; }
+  catch(e) { res.innerHTML = '<span style="color:#d32f2f">鉂?' + e.message + '</span>'; }
+}
+function clearJSON(){ document.getElementById('json-input').value='';document.getElementById('json-result').innerHTML=''; }
+
+// Base64
+function base64Encode(){
+  const val = document.getElementById('base64-input').value;
+  try { document.getElementById('base64-result').textContent = btoa(unescape(encodeURIComponent(val))); }
+  catch(e) { document.getElementById('base64-result').textContent = btoa(val); }
+}
+function base64Decode(){
+  const val = document.getElementById('base64-input').value;
+  try {
+    let decoded = decodeURIComponent(escape(atob(val)));
+    document.getElementById('base64-result').textContent = decoded;
+  } catch(e) {
+    document.getElementById('base64-result').textContent = '瑙ｇ爜澶辫触: 闈炴湁鏁?Base64 瀛楃涓?;
+  }
+}
+function clearBase64(){ document.getElementById('base64-input').value='';document.getElementById('base64-result').textContent=''; }
+
+// 鏃堕棿鎴?function tsToDate(){
+  const ts = parseInt(document.getElementById('ts-input').value);
+  if(!ts) return;
+  const d = new Date(ts * 1000);
+  document.getElementById('ts-result').textContent = d.toLocaleString('zh-CN');
+  document.getElementById('dt-input').value = d.toISOString().slice(0,19).replace('T',' ');
+}
+function dateToTs(){
+  const dt = new Date(document.getElementById('dt-input').value);
+  if(isNaN(dt.getTime())) return;
+  const ts = Math.floor(dt.getTime() / 1000);
+  document.getElementById('ts-result').textContent = ts;
+  document.getElementById('ts-input').value = ts;
+}
+function tsNow(){
+  const ts = Math.floor(Date.now() / 1000);
+  document.getElementById('ts-input').value = ts;
+  tsToDate();
+}
+
+// 浜岀淮鐮?- 浣跨敤 Canvas API 绠€鍗曞疄鐜?function generateQR(){
+  const text = document.getElementById('qr-input').value;
+  if(!text) return;
+  const canvas = document.getElementById('qr-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0,0,256,256);
+  // 绠€鏄撴ā鎷燂細鏍规嵁鏂囨湰鐢熸垚瑙嗚鍥炬
+  const hash = simpleHash(text);
+  const size = 8, margin = 2, total = 32;
+  ctx.fillStyle = '#000';
+  for(let y=0; y<total; y++){
+    for(let x=0; x<total; x++){
+      if(x<margin||x>=total-margin||y<margin||y>=total-margin){
+        if((hash[(y*total+x)%hash.length] & 1)) ctx.fillRect(x*size,y*size,size,size);
+      } else {
+        if((hash[((y+3)*total+x+7)%hash.length] & 1)) ctx.fillRect(x*size,y*size,size,size);
+      }
+    }
+  }
+}
+function simpleHash(str){
+  const arr = [];
+  for(let i=0;i<str.length*3;i++){
+    arr.push((str.charCodeAt(i%str.length)*(i+1)*7+13)&255);
+  }
+  return arr;
+}
+function downloadQR(){
+  const canvas = document.getElementById('qr-canvas');
+  const a = document.createElement('a');
+  a.href = canvas.toDataURL('image/png');
+  a.download = 'qr-code.png';
+  a.click();
+}
+
+// 棰滆壊
+function updateColor(){
+  const hex = document.getElementById('color-picker').value;
+  document.getElementById('color-preview').style.background = hex;
+  document.getElementById('hex-value').textContent = hex.toUpperCase();
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  document.getElementById('color-info').innerHTML =
+    `RGB: (${r}, ${g}, ${b}) | HEX: ${hex.toUpperCase()}`;
+}
+updateColor();
+
+// Markdown
+const mdInput = document.getElementById('md-input');
+const mdPreview = document.getElementById('md-preview');
+mdInput.addEventListener('input', () => { mdPreview.innerHTML = simpleMD(mdInput.value); });
+function simpleMD(text){
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/### (.+)/g,'<h4>$1</h4>')
+    .replace(/## (.+)/g,'<h3>$1</h3>')
+    .replace(/# (.+)/g,'<h2>$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code>$1</code>')
+    .replace(/^- (.+)/gm,'<li>$1</li>')
+    .replace(/(<li>.*<\/li>)/s,'<ul>$1</ul>')
+    .replace(/\n/g,'<br>');
+}
+function insertMdSample(){
+  mdInput.value = '# 娆㈣繋浣跨敤\n\n杩欐槸涓€涓?**Markdown** 缂栬緫鍣ㄣ€俓n\n## 鍔熻兘鍒楄〃\n\n- 瀹炴椂棰勮\n- 鏀寔绮椾綋鍜屾枩浣揬n- 浠ｇ爜楂樹寒\n\n> 鎵€鏈夋暟鎹湰鍦板鐞?;
+  mdPreview.innerHTML = simpleMD(mdInput.value);
+}
+</script>
+</body>
+</html>
